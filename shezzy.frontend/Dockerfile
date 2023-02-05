@@ -1,60 +1,39 @@
-# build environment
 FROM node:lts-alpine as build
 
+# update and install the latest dependencies
+# Add non root user to the docker image and set the user
+RUN apk update && apk upgrade && adduser -D nuxtuser
+
+USER nuxtuser
+
+# set work dir as app
 WORKDIR /app
+# copy the nuxt project content with proper permission for the user nuxtuser
+COPY --chown=nuxtuser:nuxtuser . /app
+# COPY . ./
+# install all the project npm dependencies
+# build the nuxt project to generate the artifacts in .output directory
+RUN npm install && npx nuxt build
 
-ENV PATH /app/node_modules/.bin:$PATH
+# we are using multi stage build process to keep the image size as small as possible
+FROM node:lts-alpine
+# update and install latest dependencies, add dumb-init package
+# add a non root user
+RUN apk update && apk upgrade && apk add dumb-init && adduser -D nuxtuser 
+# set non root user
+USER nuxtuser
 
-COPY package.json /app/package.json
+# set work dir as app
+WORKDIR /app
+# copy the output directory to the /app directory from 
+# build stage with proper permissions for user nuxt user
+COPY --chown=nuxtuser:nuxtuser --from=build /app/.output ./
+# expose 4024 on container
+EXPOSE 4024
 
-RUN npm config set unsafe-perm true
-
-RUN npm install --silent
-
-RUN npm install @vue/cli@5.0.8 -g
-
-COPY . .
-
-RUN npm run build
-
-#production environment
-
-FROM nginx:stable-alpine
-
-COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
-
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
-
-COPY --from=build ./app/dist /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-
-
-
-
-# # base image
-# FROM node:12.2.0-alpine
-# # set working directory
-
-# WORKDIR /app
-
-# # add /app/node_modules/.bin to $PATH
-
-# ENV PATH /app/node_modules/.bin:$PATH
-
-# # install and cache app dependencies
-
-# COPY package.json /app/package.json
-
-# RUN npm config set unsafe-perm true
-
-# RUN npm install
-
-# RUN npm install @vue/cli@3.7.0 -g
-
-# # start app
-
-# CMD ["npm", "run", "serve"]
+# set app host and port . In nuxt 3 this is based on nitor and you can read
+#more on this https://nitro.unjs.io/deploy/node#environment-variables
+ENV HOST=0.0.0.0 PORT=4024 NODE_ENV=production
+# start the app with dumb init to spawn the Node.js runtime process
+# with signal support
+CMD ["dumb-init","node","/app/server/index.mjs"]

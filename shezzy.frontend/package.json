@@ -4,17 +4,18 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev --port=4026",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "build": "nuxi build",
+    "dev": "nuxt dev --port=4024",
+    "start": "nuxi preview",
+    "generate": "nuxi generate",
+    "preview": "nuxt prepare && nuxt preview --port=4024",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@hapi/iron": "^7.0.0"
   },
   "devDependencies": {
-    "@auth0/auth0-spa-js": "^2.0.0",
+    "@types/node": "^18.11.19",
     "jose": "~4.11.0",
     "nuxt": "^3.0.0",
     "primeflex": "^3.3.0",

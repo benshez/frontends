@@ -3,6 +3,7 @@ services:
   docker-benshez-router-frontend:
     build: .
     container_name: docker-benshez-router-frontend
+    image: docker-benshez-router-frontend
     networks:
       - benshez_router_frontend    
     ports:

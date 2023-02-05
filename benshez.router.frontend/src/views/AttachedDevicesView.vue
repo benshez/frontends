@@ -2,7 +2,14 @@
   <div class="row">
     <div class="col-12 col-xl-12 mb-4 mb-lg-0">
       <div class="card">
-        <h5 class="card-header">Attached Devices ({{ devices?.devices?.count }})</h5>
+        <h5 class="card-header">
+          <span class="position-relative">Attached Devices
+            <span
+              class="position-absolute top-50 start-100 translate-middle bg-primary rounded-circle devices-count text-bg-primary">
+              {{ devices?.devices?.count }}
+            </span>
+          </span>
+        </h5>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-striped">
@@ -47,33 +54,57 @@
 <script setup>
 import { onMounted, ref } from "vue"
 import api from "../apis/netgear"
-import { useViewStateStore } from '../stores/viewStateStore'
+import { useViewStateStore } from "../stores/viewStateStore"
 
 const { setSpinnerShown } = useViewStateStore()
 
 let devices = ref({})
 const getAttachedDevices = async () => {
-  devices.value = await api.getAttachedDevices();
-  setSpinnerShown(false)
+  try {
+    devices.value = await api.getAttachedDevices();
+  } catch (error) {
+
+  } finally {
+    setSpinnerShown(false)
+  }
 }
 const onAllowClick = async (device) => {
-  setSpinnerShown(true)
-  await api.allowOrBlockDevice({
-    action: "Allow",
-    mac: device.MAC
-  })
-  await getAttachedDevices()
+  try {
+    setSpinnerShown(true)
+    await api.allowOrBlockDevice({
+      action: "Allow",
+      mac: device.MAC
+    })  
+  } catch (error) {
+
+  } finally {
+    await getAttachedDevices()
+  }
 }
 const onDisAllowClick = async (device) => {
-  setSpinnerShown(true)
-  await api.allowOrBlockDevice({
-    action: "Block",
-    mac: device.MAC
-  })
-  await getAttachedDevices()
+  try {
+    setSpinnerShown(true)
+    await api.allowOrBlockDevice({
+      action: "Block",
+      mac: device.MAC
+    })
+  } catch (error) {
+
+  } finally {
+    await getAttachedDevices()
+  }
 }
 onMounted(async () => {
   setSpinnerShown(true)
   await getAttachedDevices()
 })
 </script>
+<style scoped lang="scss">
+.devices-count {
+  font-size: 0.50rem;
+  margin-left: 0.3rem;
+  margin-top: -0.4rem;
+  padding: 0.2rem;
+  border-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
+}
+</style>

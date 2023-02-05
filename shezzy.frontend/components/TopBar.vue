@@ -11,16 +11,24 @@
         <Avatar :image="user.picture" shape="circle" />
       </div>
       <div v-else>
-        <a href="/api/auth/login" class="p-button p-component">
-          <Button label="Login"></Button>
+        <a href="/api/auth/login">
+          <Button label="Login" @click="onLoginClick"></Button>
         </a>
       </div>
     </template>
   </Menubar>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const user = useUser()
+
+const onLoginClick = async () => {
+  await useFetch<any>('/api/auth/login', { server: false })
+}
+
+const onLogoutClick = async () => {
+  await useFetch<any>('/api/auth/logout', { server: true })
+}
 
 const items = [
   {

@@ -2,12 +2,13 @@
 /node_modules
 /.pnp
 .pnp.js
+*.log*
 
 # build
-/build
-.output
 .nuxt
-nuxt.d.ts
+.nitro
+.cache
+.output
 
 # misc
 .DS_Store

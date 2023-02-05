@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
         Authorization: `Bearer ${event.context.session.access_token}`
       }
     })
-    console.log(await weather.json())
 
     const response = await $fetch<MemeResponse>(API_URL)
     if (response.success) {

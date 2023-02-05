@@ -5,15 +5,14 @@ services:
     container_name: docker-shezzy-frontend
     image: docker-shezzy-frontend
     networks:
-      - docker_shezzy_backend    
+      - shezzy_frontend    
     ports:
-      - "4026:80"      
+      - "4024:4024"      
     volumes:
-      - /usr/share/nginx/html
-      - /app/node_modules
+      - /app
     env_file: .env
 
 networks:
-  docker_shezzy_backend:
-    name: docker_shezzy_backend
+  shezzy_frontend:
+    name: shezzy_frontend
     driver: bridge     
