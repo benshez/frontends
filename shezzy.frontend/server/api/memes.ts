@@ -10,6 +10,8 @@ export default defineEventHandler(async (event) => {
       }
     })
 
+    await weather.json()
+    
     const response = await $fetch<MemeResponse>(API_URL)
     if (response.success) {
       return response.data.memes
