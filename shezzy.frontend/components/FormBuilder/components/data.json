@@ -1,0 +1,95 @@
+{
+  "steps": [
+    {
+      "label": "Personal",
+      "pageIndex": 0,
+      "inValidItemsCount": 0,
+      "elements": [
+        {
+          "id": "firstname",
+          "label": "Firstname",
+          "component": "FormInput",
+          "value": "some name",
+          "helpText": "Enter your username to reset your password.",
+          "readonly": false,
+          "visible": true,
+          "visibleIf": [],
+          "isRequired": true,
+          "isValid": true,
+          "cssClass": "text-base text-color surface-overlay p-3 border-1 border-solid border-round appearance-none outline-none focus:border-primary w-full",
+          "validators": [
+            {
+              "type": "expression"
+            }
+          ]
+        },
+        {
+          "id": "country_code",
+          "label": "Country",
+          "component": "FormDropdown",
+          "value": "",
+          "helpText": "Enter your username to reset your password.",
+          "isRequired": true,
+          "isValid": true,
+          "readonly": false,
+          "visible": true,
+          "visibleIf": [
+            {
+              "key": "firstname",
+              "value": "Ben"
+            }
+          ],
+          "cssClass": "text-base text-color surface-overlay p-1 border-1 border-solid border-round appearance-none outline-none focus:border-primary w-full",
+          "options": [
+            {
+              "value": "New York",
+              "key": "NY"
+            },
+            {
+              "value": "Rome",
+              "key": "RM"
+            },
+            {
+              "value": "London",
+              "key": "LDN"
+            },
+            {
+              "value": "Istanbul",
+              "key": "IST"
+            },
+            {
+              "value": "Paris",
+              "key": "PRS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Some Other",
+      "pageIndex": 1,
+      "inValidItemsCount": 0,
+      "elements": [
+        {
+          "id": "surname",
+          "label": "Surname",
+          "component": "FormInput",
+          "value": null,
+          "isRequired": true,
+          "isValid": true,
+          "readonly": false,
+          "visible": true,
+          "visibleIf": [],
+          "cssClass": "text-base text-color surface-overlay p-3 border-1 border-solid border-round appearance-none outline-none focus:border-primary w-full",
+          "helpText": "Enter your username to reset your password."
+        }
+      ]
+    },
+    {
+      "label": "The End",
+      "pageIndex": 2,
+      "elements": []
+    }
+  ],
+  "currentStepIndex": 0
+}

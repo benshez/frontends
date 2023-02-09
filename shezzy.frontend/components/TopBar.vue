@@ -46,6 +46,12 @@ const items = [
     icon: 'pi pi-fw pi-user',
     to: '/profile',
     visible: user.value != null
+  },
+  {
+    label: 'Survey',
+    icon: 'pi pi-fw pi-user',
+    to: '/survey',
+    visible: user.value != null
   }
 ]
 </script>
