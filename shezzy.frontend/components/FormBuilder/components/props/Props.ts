@@ -1,31 +1,40 @@
+import { IStep } from '~~/components/FormBuilder/components/interfaces/IStep';
 import { PropType } from 'vue';
-import { IStep, ISteps } from '~~/components/FormBuilder/components/interfaces/IStep'
+import { IPage } from '~~/components/FormBuilder/components/interfaces/IPage'
 import { IElement } from '~~/components/FormBuilder/components/interfaces/IElement'
 
-export type IStepsProps = {
+export type IPagesProps = {
+  pages: {
+    type: PropType<Array<IPage>>,
+    required: true
+  }, 
+  pageIndex: {
+    type: PropType<number>,
+    required: true
+  }
+}
+
+export const PagesProps: IPagesProps = {
+  pages: {
+    type: Object as PropType<Array<IPage>>,
+    required: true
+  }, 
+  pageIndex: {
+    type: Number,
+    required: true
+  }
+}
+
+export interface IStepsProps {
   steps: {
-    type: PropType<ISteps>,
+    type: PropType<Array<IStep>>,
     required: true
   }
 }
 
 export const StepsProps: IStepsProps = {
   steps: {
-    type: Object as PropType<ISteps>,
-    required: true
-  }
-}
-
-export type IStepProps = {
-  step: {
-    type: PropType<IStep>,
-    required: true
-  }
-}
-
-export const StepProps: IStepProps = {
-  step: {
-    type: Object as PropType<IStep>,
+    type: Object as PropType<Array<IStep>>,
     required: true
   }
 }

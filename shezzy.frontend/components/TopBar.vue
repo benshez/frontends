@@ -1,19 +1,14 @@
 <template>
   <Menubar :model="items">
     <template #start>
-      <img alt="logo" src="https://nuxt.com/assets/design-kit/logo/full-logo-green-dark.svg" height="40" class="mr-2">
-      <span class="logo-title">+ Auth0</span>
+      A logo goes here...
     </template>
+
     <template #end>
       <div v-if="user" class="flex align-items-center">
         <p class="mr-2">Welcome, {{ user.nickname }} | <a href="/api/auth/logout">Logout</a>
         </p>
         <Avatar :image="user.picture" shape="circle" />
-      </div>
-      <div v-else>
-        <a href="/api/auth/login">
-          <Button label="Login" @click="onLoginClick"></Button>
-        </a>
       </div>
     </template>
   </Menubar>
@@ -31,6 +26,18 @@ const onLogoutClick = async () => {
 }
 
 const items = [
+  {
+    label: `Welcome, ${user?.value?.nickname}`,
+    icon: 'pi pi-fw pi-home',
+    url: '/api/auth/logout',
+    visible: user.value != null
+  },
+  {
+    label: `Login`,
+    icon: 'pi pi-fw pi-home',
+    url: '/api/auth/login',
+    visible: user.value === null
+  },  
   {
     label: 'Home',
     icon: 'pi pi-fw pi-home',

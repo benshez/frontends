@@ -11,7 +11,10 @@ WORKDIR /app
 # copy the nuxt project content with proper permission for the user nuxtuser
 COPY --chown=nuxtuser:nuxtuser . /app
 # COPY . ./
+# update npm
+RUN npm install npm
 # install all the project npm dependencies
+RUN npm install sass
 # build the nuxt project to generate the artifacts in .output directory
 RUN npm install && npx nuxt build
 

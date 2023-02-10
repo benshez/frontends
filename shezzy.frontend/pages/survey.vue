@@ -1,11 +1,11 @@
 <template>
   <div class="grid">
     <div class="col">
-      <MySurvey />
+      <FormBuilder />
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import MySurvey from '~~/components/FormBuilder/components/FormBuilder.vue';
+import FormBuilder from '~~/components/FormBuilder/components/FormBuilder.vue';
 
 </script>

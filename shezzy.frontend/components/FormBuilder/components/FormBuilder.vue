@@ -1,109 +1,27 @@
 <template>
-  <div>
-    <Toast />
-    <Card class="custom" v-if="steps">
-      <template #content>
-        <Steps :model="steps.steps" :readonly="false">
-          <template #item="{ item }">
-            <span :class="isDisabled(item) ? 'p-menuitem-link p-disabled' : 'p-menuitem-link'"
-              :tabindex="item.pageIndex">
-              <span class="p-steps-number">{{ item.pageIndex + 1 }}</span>
-              <span class="p-steps-title">{{ item.label }}</span>
-            </span>
-          </template>
-        </Steps>
-      </template>
-    </Card>
-    <Card class="mt-3 custom" v-if="steps">
-      <template #content>
-        <div class="formgrid grid">
-          <div class="field w-full" v-for="(element, elementIndex) in steps.steps[steps.currentStepIndex].elements"
-            :key="elementIndex">
-            <component :is="comp(element)" :steps="steps" :step="step" :element="element" @input="handleInput" v-if="isVisible(steps, element)" />
-          </div>
-        </div>
-        <Divider align="left" type="dashed" />
-      </template>
-      <template #footer>
-        <div class="grid no-gutter mt-4 relative">
-          <Button @click="onPrevStepClick" v-if="!onIsFirstStep() && !onIsFinalStep()"
-            class="absolute bottom-0 left-0">Back</Button>
-          <Button @click="onNextStepClick" v-if="!onIsFinalStep()" class="absolute bottom-0 right-0">Next</Button>
-        </div>
-      </template>
-    </Card>
+  <div v-if="pages">
+    <h1>{{ pages[pageIndex].heading }}</h1>
+    <FormStepper :pages="pages" :page-index="pageIndex" :steps="steps" v-if="steps" />
+    <FormBody :pages="pages" :page-index="pageIndex" :steps="steps" v-if="steps" @data-input="updateData" />
   </div>
 </template>
 <script lang="ts" setup>
 import { ref, Ref } from 'vue';
-import { useToast } from 'primevue/usetoast';
-import FormInput from '~~/components/FormBuilder/components/FormInput.vue';
-import FormDropdown from '~~/components/FormBuilder/components/FormDropdown.vue';
+import FormStepper from '~~/components/FormBuilder/components/FormStepper.vue'
+import FormBody from '~~/components/FormBuilder/components/FormBody.vue'
 import data from '~~/components/FormBuilder/components/data.json'
 import { useFormBuilderComponent } from '~~/components/FormBuilder/components/useFormBuilderComponent'
-import { ISteps, IStep } from '~~/components/FormBuilder/components/interfaces/IStep'
-import { IElement } from '~~/components/FormBuilder/components/interfaces/IElement'
+import { IPage } from '~~/components/FormBuilder/components/interfaces/IPage'
+import { IStep } from '~~/components/FormBuilder/components/interfaces/IStep'
 
-const validationEmitter = defineEmits(["validate"])
-const { handleValidate, isVisible } = useFormBuilderComponent()
+const route = useRoute()
+const routeName: string = route?.name?.toString() as string
+const { findPageIndex } = useFormBuilderComponent()
+const pages: Ref<Array<IPage>> = ref(data.pages as Array<IPage>)
+const pageIndex = findPageIndex(pages.value, routeName)
+const steps: Ref<Array<IStep>> = ref(pages.value[pageIndex].steps)
 
-const toast = useToast();
-const steps: Ref<ISteps> = ref(data as ISteps)
-const step: Ref<IStep> = ref(steps.value.steps[steps.value.currentStepIndex])
-
-const onNextStepClick = () => {
-  handleValidate(validationEmitter, step.value)
-
-  if (step.value?.inValidItemsCount > 0) return
-
-  steps.value.currentStepIndex++;
-
-  step.value = steps.value.steps[steps.value.currentStepIndex]
-
-  const completed = steps.value.currentStepIndex >= steps.value.steps.length
-
-  if (completed) steps.value.currentStepIndex = (steps.value.currentStepIndex - 1)
-
-  if (onIsFinalStep()) complete()
-};
-
-const onPrevStepClick = () => {
-  steps.value.currentStepIndex--;
-
-  step.value = steps.value.steps[steps.value.currentStepIndex]
-  
-  const completed = steps.value.currentStepIndex <= 0
-
-  if (completed) steps.value.currentStepIndex = 0
-};
-
-const onIsFirstStep = (): boolean => {
-  return steps.value.currentStepIndex === 0
-}
-
-const onIsFinalStep = (): boolean => {
-  const completed = (steps.value.currentStepIndex === (steps.value.steps.length - 1))
-  return completed
-}
-
-const complete = () => {
-  let values: any = [];
-  const payload = steps.value.steps.forEach((step) => {
-    return step.elements?.forEach((element) => {
-      values.push({
-        id: element.id,
-        value: element.value
-      })
-    })
-  })
-  toast.add({ severity: 'success', summary: 'Order submitted', detail: `Dear ${JSON.stringify(values)} your order completed.`, life: 3000 });
-};
-
-const isDisabled = (item: any) => {
-  return item.pageIndex !== (steps.value.currentStepIndex)
-}
-
-const handleInput = (event: any) => {
+const updateData = (event: any) => {
 
   const y = event
   // const top = parseInt(event.id.split('.')[0]);
@@ -112,18 +30,6 @@ const handleInput = (event: any) => {
   // console.log(form.value.steps[top].elements[bot].value)
 }
 
-const comp = (element: IElement): any => {
-  let component = null;
-  switch (element.component) {
-    case "FormInput":
-      component = FormInput;
-      break;
-    case "FormDropdown":
-      component = FormDropdown;
-      break;
-  }
-  return component
-}
 </script>
 <style lang="scss" scoped>
 .p-steps {

@@ -1,8 +1,10 @@
 import find from 'lodash/find'
 import flatten from 'lodash/flatten'
 import map from 'lodash/map'
+import findIndex from 'lodash/findIndex'
+import { IPage } from '~~/components/FormBuilder/components/interfaces/IPage'
+import { IStep } from '~~/components/FormBuilder/components/interfaces/IStep'
 import { IElement } from '~~/components/FormBuilder/components/interfaces/IElement'
-import { IStep, ISteps } from '~~/components/FormBuilder/components/interfaces/IStep'
 import { IOption } from '~~/components/FormBuilder/components/interfaces/IOption'
 
 export const useFormBuilderComponent = () => {
@@ -24,11 +26,17 @@ export const useFormBuilderComponent = () => {
     element.cssClass = element.isValid ? element.cssClass?.replace(/ p-invalid/g, "") : `${element.cssClass} p-invalid`
   }
 
-  const findElementById = (steps: ISteps, key: string): IElement => {
-    return find(flatten(map(steps.steps, 'elements')), { id: key }) as IElement;
+  const findPageIndex = (pages: Array<IPage>, name: string): number => {
+    return findIndex(pages, (page: IPage) => {
+      return page.name === name;
+    })
   }
 
-  const isVisible = (steps: ISteps, element: IElement): boolean => {
+  const findElementById = (steps: Array<IStep>, key: string): IElement => {
+    return find(flatten(map(steps, 'elements')), { id: key }) as IElement;
+  }
+
+  const isVisible = (steps: Array<IStep>, element: IElement): boolean => {
     const queries: Array<IOption> = element?.visibleIf || [];
 
     if (queries.length > 0) {
@@ -41,9 +49,9 @@ export const useFormBuilderComponent = () => {
     return element.visible || true
   }
 
-  const handleInput = (emit: any, steps: ISteps, element: IElement) => {
+  const handleInput = (steps: Array<IStep>, element: IElement) => {
     //handleValidate(emit, element)
-    steps.steps.forEach((step) => {
+    steps.forEach((step) => {
       step.elements?.forEach((element) => {
         if (element?.visibleIf && element.visibleIf.length > 1) {
           isVisible(steps, element)
@@ -51,7 +59,7 @@ export const useFormBuilderComponent = () => {
       })
     })
     if (validate(element)) {
-      emit("input", { id: element.id, value: element.value });
+      //emit("data-input", { id: element.id, value: element.value });
     } else {
       console.log('Not valid!')
     }
@@ -73,7 +81,8 @@ export const useFormBuilderComponent = () => {
     handleInput,
     handleValidate,
     validate,
-    isVisible
+    isVisible,
+    findPageIndex
   }
 }
 
