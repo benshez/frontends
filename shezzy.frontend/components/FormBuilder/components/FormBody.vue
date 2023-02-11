@@ -24,24 +24,20 @@
   </Card>
 </template>
 <script lang="ts" setup>
-import { ref, Ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import FormInput from '~~/components/FormBuilder/components/FormInput.vue'
 import FormDropdown from '~~/components/FormBuilder/components/FormDropdown.vue'
 import FormCheckbox from '~~/components/FormBuilder/components/FormCheckbox.vue'
 import FormInputSwitch from '~~/components/FormBuilder/components/FormInputSwitch.vue'
 import { useFormBuilderComponent } from '~~/components/FormBuilder/components/useFormBuilderComponent'
-import { IStep } from '~~/models/interfaces/IStep'
 import { IElement } from '~~/models/interfaces/IElement'
 
-const toast = useToast();
+const toast = useToast()
 const page = usePage()
 const steps = useSteps()
-
+const step = useStep()
 const emitter = defineEmits(['input', 'validate'])
 const { handleValidate, isVisible } = useFormBuilderComponent()
-
-const step: Ref<IStep> = ref(steps.value[page.value.currentStepIndex])
 
 const onNextStepClick = () => {
   handleValidate(emitter, step.value)
@@ -80,7 +76,7 @@ const onIsFinalStep = (): boolean => {
 
 const complete = () => {
   let values: any = [];
-  const payload = steps.value.forEach((step) => {
+  steps.value.forEach((step) => {
     return step.elements?.forEach((element) => {
       values.push({
         id: element.id,
