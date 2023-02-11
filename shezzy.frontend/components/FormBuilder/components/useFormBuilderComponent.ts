@@ -2,10 +2,10 @@ import find from 'lodash/find'
 import flatten from 'lodash/flatten'
 import map from 'lodash/map'
 import findIndex from 'lodash/findIndex'
-import { IPage } from '~~/components/FormBuilder/components/interfaces/IPage'
-import { IStep } from '~~/components/FormBuilder/components/interfaces/IStep'
-import { IElement } from '~~/components/FormBuilder/components/interfaces/IElement'
-import { IOption } from '~~/components/FormBuilder/components/interfaces/IOption'
+import { IPage } from '~~/models/interfaces/IPage'
+import { IStep } from '~~/models/interfaces/IStep'
+import { IElement } from '~~/models/interfaces/IElement'
+import { IOption } from '~~/models/interfaces/IOption'
 
 export const useFormBuilderComponent = () => {
   const validate = (element: IElement): boolean => {

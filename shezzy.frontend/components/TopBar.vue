@@ -25,23 +25,23 @@ const items = [
   {
     label: 'Home',
     icon: 'pi pi-fw pi-home',
-    to: '/'
+    to: '/slug/home'
   },
   {
     label: 'About',
     icon: 'pi pi-fw pi-file',
-    to: '/about'
+    to: '/slug/about'
   },
   {
     label: 'Profile',
     icon: 'pi pi-fw pi-user',
-    to: '/profile',
+    to: '/slug/profile',
     visible: user.value != null
   },
   {
     label: 'Survey',
     icon: 'pi pi-fw pi-user',
-    to: '/survey',
+    to: '/slug/survey',
     visible: user.value != null
   },
   {

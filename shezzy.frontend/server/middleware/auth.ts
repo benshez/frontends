@@ -6,7 +6,7 @@ export default defineEventHandler((event) => {
   if (event.node.req.url?.includes('/api/auth/')) {
     return
   }
-  if (event.node.req.url?.includes('/private')) {
+  if (event.node.req.url?.includes('/slug/home')) {
     return
   }
   if (event.node.req.url?.includes('/api/')) {

@@ -1,5 +1,5 @@
-import { IOption } from '~~/components/FormBuilder/components/interfaces/IOption';
-import { IValidator } from '~~/components/FormBuilder/components/interfaces/IValidator';
+import { IOption } from '~~/models/interfaces/IOption';
+import { IValidator } from '~~/models/interfaces/IValidator';
 
 export interface IElement {
   id?: string;

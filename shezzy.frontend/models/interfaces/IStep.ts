@@ -1,4 +1,4 @@
-import { IElement } from '~~/components/FormBuilder/components/interfaces/IElement'
+import { IElement } from '~~/models/interfaces/IElement'
 
 export interface IStep {
   label: string;

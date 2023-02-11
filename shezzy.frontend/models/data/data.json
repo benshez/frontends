@@ -137,6 +137,25 @@
         }
       ],
       "currentStepIndex": 0
+    },
+    {
+      "name": "home",
+      "heading": "Home",
+      "steps": [],
+      "currentStepIndex": 0
+    },
+    {
+      "name": "about",
+      "heading": "About",
+      "steps": [],
+      "currentStepIndex": 0
+    }
+    ,
+    {
+      "name": "profile",
+      "heading": "Profile",
+      "steps": [],
+      "currentStepIndex": 0
     }
   ]
 }

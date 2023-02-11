@@ -1,5 +1,5 @@
 <template>
-  <Card class="custom">
+  <Card class="custom" v-if="steps && steps.length > 0">
     <template #content>
       <Steps :model="steps" :readonly="false">
         <template #item="{ item }">
@@ -13,15 +13,41 @@
   </Card>
 </template>
 <script lang="ts" setup>
-import { PagesProps, StepsProps } from '~~/components/FormBuilder/components/props/Props'
-
-const props = defineProps({
-  ...PagesProps,
-  ...StepsProps
-});
+const page = usePage()
+const steps = useSteps()
 
 const isDisabled = (item: any) => {
-  return item.pageIndex !== (props.pages[props.pageIndex].currentStepIndex)
+  return item.pageIndex !== (page.value.currentStepIndex)
 }
-
 </script>
+<style lang="scss" scoped>
+.p-steps {
+  .p-steps-list {
+    .p-steps-item {
+      .p-menuitem-link {
+        .p-steps-number {
+          background: #EFF6FF;
+          color: #1D4ED8;
+        }
+
+        .p-steps-title {
+          font-weight: bold;
+        }
+
+        &.p-disabled {
+          opacity: 1;
+
+          .p-steps-number {
+            color: #6c757d;
+            background: #ffffff;
+          }
+
+          .p-steps-title {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

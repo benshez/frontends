@@ -1,4 +1,4 @@
-import { IStep } from '~~/components/FormBuilder/components/interfaces/IStep'
+import { IStep } from '~~/models/interfaces/IStep'
 
 export interface IPage {
   name: string;

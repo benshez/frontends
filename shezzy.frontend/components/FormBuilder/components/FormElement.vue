@@ -12,10 +12,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { PagesProps, ElementProps } from '~~/components/FormBuilder/components/props/Props'
+import { ElementProps } from '~~/components/FormBuilder/components/props/Props'
 
 const props = defineProps({
-  ...ElementProps,
-  ...PagesProps
+  ...ElementProps
 });
 </script>

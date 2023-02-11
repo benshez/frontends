@@ -5,11 +5,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const allowedRoutes = ['/', '/login', '/about']
   if (user.value) {
     if (allowedRoutes.includes(to.path)) {
-      return navigateTo('/private')
+      return navigateTo('/slug/home')
     }
   } else {
     if (!allowedRoutes.includes(to.path)) {
-      return navigateTo('/')
+      return navigateTo('/slug/home')
     }
   }
 })

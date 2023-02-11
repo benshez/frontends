@@ -5,6 +5,7 @@
       <Panel :header="route.name?.toString()" class="mt-4">
         <slot />
       </Panel>
+ 
     </div>
   </div>
 </template>
