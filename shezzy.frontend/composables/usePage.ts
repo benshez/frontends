@@ -4,7 +4,7 @@ import data from '~~/models/data/data.json'
 
 export default function () {
     const route = useRoute()
-    const pageName: string = route.params.id as string
+    const pageName: string = route.params.slug as string
     let thePage: IPage
 
     const pages: Array<IPage> = data.pages as Array<IPage>

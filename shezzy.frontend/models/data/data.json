@@ -156,6 +156,12 @@
       "heading": "Profile",
       "steps": [],
       "currentStepIndex": 0
+    },
+    {
+      "name": "private",
+      "heading": "Private",
+      "steps": [],
+      "currentStepIndex": 0
     }
   ]
 }

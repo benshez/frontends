@@ -30,7 +30,7 @@ const items = [
   {
     label: 'About',
     icon: 'pi pi-fw pi-file',
-    to: '/slug/about'
+    to: '/slug/about',
   },
   {
     label: 'Profile',

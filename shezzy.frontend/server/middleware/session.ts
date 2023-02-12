@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
   if (!event.context.session) {
     event.context.session = {}
   }
-
   if (cookie) {
     const { user, access_token } = await Iron.unseal(cookie, AUTH0_CLIENT_SECRET, Iron.defaults)
     event.context.session.user = user
