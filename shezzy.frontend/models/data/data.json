@@ -3,6 +3,7 @@
     {
       "name": "survey",
       "heading": "Surveys",
+      "path": "/slug/survey",
       "steps": [
         {
           "label": "Personal",
@@ -136,32 +137,33 @@
           "elements": []
         }
       ],
-      "currentStepIndex": 0
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": true
     },
     {
       "name": "home",
       "heading": "Home",
+      "path": "/slug/home",
       "steps": [],
-      "currentStepIndex": 0
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": false
     },
     {
       "name": "about",
+      "path": "/slug/about",
       "heading": "About",
       "steps": [],
-      "currentStepIndex": 0
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": false
     }
     ,
     {
       "name": "profile",
+      "path": "/slug/profile",
       "heading": "Profile",
       "steps": [],
-      "currentStepIndex": 0
-    },
-    {
-      "name": "private",
-      "heading": "Private",
-      "steps": [],
-      "currentStepIndex": 0
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": true
     }
   ]
 }

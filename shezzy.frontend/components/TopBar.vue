@@ -1,5 +1,5 @@
 <template>
-  <Menubar :model="items">
+  <Menubar :model="menuItems" v-if="menuItems">
     <template #start>
       A logo goes here...
     </template>
@@ -13,37 +13,49 @@
 </template>
 
 <script setup lang="ts">
+import { IPage } from "~~/models/interfaces/IPage"
+import data from '~~/models/data/data.json'
 const user = useUser()
+const pages = data.pages
 
-const items = [
+const menuItems: any = []
+
+menuItems.push(
   {
     label: `Login`,
     icon: 'pi pi-fw pi-home',
     url: '/api/auth/login',
     visible: user.value === null
-  },
-  {
-    label: 'Home',
-    icon: 'pi pi-fw pi-home',
-    to: '/slug/home'
-  },
-  {
-    label: 'About',
-    icon: 'pi pi-fw pi-file',
-    to: '/slug/about',
-  },
-  {
-    label: 'Profile',
-    icon: 'pi pi-fw pi-user',
-    to: '/slug/profile',
-    visible: user.value != null
-  },
-  {
-    label: 'Survey',
-    icon: 'pi pi-fw pi-user',
-    to: '/slug/survey',
-    visible: user.value != null
-  },
+  }
+)
+
+pages.forEach((page: any) => {
+  if (user.value) {
+    menuItems.push(
+      {
+        name: page.name,
+        label: page.heading,
+        icon: 'pi pi-fw pi-home',
+        to: page.path,
+        visible: true
+      }
+    )
+  } else {
+    if (!page.requiresAuthenticaton) {
+      menuItems.push(
+        {
+          name: page.name,
+          label: page.heading,
+          icon: 'pi pi-fw pi-home',
+          to: page.path,
+          visible: true
+        }
+      )
+    }
+  }
+})
+
+menuItems.push(
   {
     label: `Welcome, ${user?.value?.nickname}`,
     icon: 'pi pi-fw pi-home',
@@ -56,7 +68,9 @@ const items = [
       }
     ]
   },
-]
+)
+
+
 </script>
 
 <style scoped>

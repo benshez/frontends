@@ -1,27 +1,28 @@
 <template>
-  <Toast />
-  <Card class="mt-3 custom" v-if="steps && steps.length > 0">
-    <template #header>
-      <h4>{{ steps[0].label }}</h4>
-    </template>
-    <template #content>
-      <div class="formgrid grid">
-        <div class="field w-full" v-for="(element, elementIndex) in steps[page.currentStepIndex].elements"
-          :key="elementIndex">
-          <component :is="comp(element)" :element="element"
-            v-if="isVisible(steps, element)" />
+  <div class="w-full">
+    <Toast />
+    <Card class="mt-3 custom" v-if="steps && steps.length > 0">
+      <template #header>
+        <h4>{{ steps[0].label }}</h4>
+      </template>
+      <template #content>
+        <div class="formgrid grid">
+          <div class="field w-full" v-for="(element, elementIndex) in steps[page.currentStepIndex].elements"
+            :key="elementIndex">
+            <component :is="comp(element)" :element="element" v-if="isVisible(steps, element)" />
+          </div>
         </div>
-      </div>
-      <Divider align="left" type="dashed" />
-    </template>
-    <template #footer>
-      <div class="grid no-gutter mt-4 relative">
-        <Button @click="onPrevStepClick" v-if="!onIsFirstStep() && !onIsFinalStep()"
-          class="absolute bottom-0 left-0">Back</Button>
-        <Button @click="onNextStepClick" v-if="!onIsFinalStep()" class="absolute bottom-0 right-0">Next</Button>
-      </div>
-    </template>
-  </Card>
+        <Divider align="left" type="dashed" />
+      </template>
+      <template #footer>
+        <div class="grid no-gutter mt-4 relative">
+          <Button @click="onPrevStepClick" v-if="!onIsFirstStep() && !onIsFinalStep()"
+            class="absolute bottom-0 left-0">Back</Button>
+          <Button @click="onNextStepClick" v-if="!onIsFinalStep()" class="absolute bottom-0 right-0">Next</Button>
+        </div>
+      </template>
+    </Card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { useToast } from 'primevue/usetoast';

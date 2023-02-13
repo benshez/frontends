@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
 
     event.node.res
       .writeHead(302, {
-        Location: '/'
+        Location: '/slug/home'
       })
       .end()
   } catch (error) {

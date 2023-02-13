@@ -1,5 +1,5 @@
 <template>
-  <div v-if="page" class="w-full">
+  <div  class="w-full">
     <h1>{{ page.heading }}</h1>
     <FormStepper />
     <FormBody />
