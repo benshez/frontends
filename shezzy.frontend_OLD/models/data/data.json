@@ -1,0 +1,169 @@
+{
+  "pages": [
+    {
+      "name": "survey",
+      "heading": "Surveys",
+      "path": "/slug/survey",
+      "steps": [
+        {
+          "label": "Personal",
+          "pageIndex": 0,
+          "inValidItemsCount": 0,
+          "elements": [
+            {
+              "id": "firstname",
+              "label": "Firstname",
+              "component": "FormInput",
+              "value": "some name",
+              "helpText": "Enter your username to reset your password.",
+              "readonly": false,
+              "visible": true,
+              "visibleIf": [],
+              "isRequired": true,
+              "isValid": true,
+              "cssClass": "text-base text-color surface-overlay p-3 border-1 border-solid border-round appearance-none outline-none focus:border-primary w-full",
+              "validators": [
+                {
+                  "type": "expression"
+                }
+              ]
+            },
+            {
+              "id": "country_code",
+              "label": "Country",
+              "component": "FormDropdown",
+              "value": "",
+              "helpText": "Enter your username to reset your password.",
+              "isRequired": true,
+              "isValid": true,
+              "readonly": false,
+              "visible": true,
+              "visibleIf": [
+                {
+                  "key": "firstname",
+                  "value": "Ben"
+                }
+              ],
+              "cssClass": "text-base text-color surface-overlay p-1 border-1 border-solid border-round appearance-none outline-none focus:border-primary w-full",
+              "options": [
+                {
+                  "value": "New York",
+                  "key": "NY"
+                },
+                {
+                  "value": "Rome",
+                  "key": "RM"
+                },
+                {
+                  "value": "London",
+                  "key": "LDN"
+                },
+                {
+                  "value": "Istanbul",
+                  "key": "IST"
+                },
+                {
+                  "value": "Paris",
+                  "key": "PRS"
+                }
+              ]
+            },
+            {
+              "id": "city",
+              "label": "City",
+              "component": "FormCheckbox",
+              "value": [],
+              "helpText": "Enter your username to reset your password.",
+              "readonly": false,
+              "visible": true,
+              "visibleIf": [],
+              "isRequired": true,
+              "isValid": true,
+              "cssClass": "",
+              "validators": [
+                {
+                  "type": "expression"
+                }
+              ],
+              "options": [
+                {
+                  "value": "Paris",
+                  "key": "PRS"
+                },
+                {
+                  "value": "Madrid",
+                  "key": "MAD"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Some Other",
+          "pageIndex": 1,
+          "inValidItemsCount": 0,
+          "elements": [
+            {
+              "id": "surname",
+              "label": "Surname",
+              "component": "FormInput",
+              "value": null,
+              "isRequired": true,
+              "isValid": true,
+              "readonly": false,
+              "visible": true,
+              "visibleIf": [],
+              "cssClass": "text-base text-color surface-overlay p-3 border-1 border-solid border-round appearance-none outline-none focus:border-primary w-full",
+              "helpText": "Enter your username to reset your password."
+            },
+            {
+              "id": "aswitch",
+              "label": "A Switch",
+              "component": "FormInputSwitch",
+              "value": false,
+              "isRequired": true,
+              "isValid": true,
+              "readonly": false,
+              "visible": true,
+              "visibleIf": [],
+              "cssClass": "",
+              "helpText": "Select your switch."
+            }
+          ]
+        },
+        {
+          "label": "The End",
+          "pageIndex": 2,
+          "elements": []
+        }
+      ],
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": true
+    },
+    {
+      "name": "home",
+      "heading": "Home",
+      "path": "/slug/home",
+      "steps": [],
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": false
+    },
+    {
+      "name": "about",
+      "path": "/slug/about",
+      "heading": "About",
+      "steps": [],
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": false
+    }
+    ,
+    {
+      "name": "profile",
+      "path": "/slug/profile",
+      "heading": "Profile",
+      "steps": [],
+      "currentStepIndex": 0,
+      "requiresAuthenticaton": true
+    }
+  ]
+}

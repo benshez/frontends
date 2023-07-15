@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <title>Shezzy Stepper</title>
+  </head>
+  <body>
+    <div id="shezzy-stepper-container">
+			
+    </div>	
+    <div id="shezzy-stepper-containers">
+        
+    </div>
+
+    <script type="text/javascript">
+      setTimeout(function () {
+        (function(w, d, link, script, p) {
+          p = d.getElementById("shezzy-stepper-containers");
+          script = d.createElement("script");
+          var js = "./shezzy-stepper.iife.js";
+          var options = {
+            "contactCode": "201023652182567983",
+            "masterCode": "OA846930",
+            "container": "shezzy-stepper-container",
+            "requiredFeatures": ["Contact", "Notepad", "Features", "Notifications"]
+          }
+          script.id="shezzy-stepper-container-script"
+          script.type="text/javascript"
+          script.src = js;
+          script.setAttribute("data-options", JSON.stringify(options));
+          
+          p.appendChild(script);
+        })(window, document);
+      }, 2000); 
+    </script>      
+  </body>
+</html>

@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  docker-shezzy-frontend:
+    build: .
+    container_name: docker-shezzy-frontend
+    image: docker-shezzy-frontend
+    networks:
+      - shezzy_frontend    
+    ports:
+      - "4024:4024"      
+    volumes:
+      - /app
+    env_file: .env
+
+networks:
+  shezzy_frontend:
+    name: shezzy_frontend
+    driver: bridge     
