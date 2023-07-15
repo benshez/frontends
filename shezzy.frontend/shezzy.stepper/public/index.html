@@ -22,10 +22,17 @@
           script = d.createElement("script");
           var js = "./shezzy-stepper.iife.js";
           var options = {
-            "contactCode": "201023652182567983",
-            "masterCode": "OA846930",
             "container": "shezzy-stepper-container",
-            "requiredFeatures": ["Contact", "Notepad", "Features", "Notifications"]
+            "user": {
+              "name": "Ace of Base",
+              "givenName": "Ace",
+              "picture": "",
+              "emailAddress": "ace@base.com",
+              "phoneNumber": "425.555.0100",
+              "sub": "",
+              "nameIdentifier": "13534646",
+              "emailVerified": false
+            }
           }
           script.id="shezzy-stepper-container-script"
           script.type="text/javascript"
@@ -34,7 +41,7 @@
           
           p.appendChild(script);
         })(window, document);
-      }, 2000); 
+      }, 1); 
     </script>      
   </body>
 </html>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import IOptions from '@/interfaces/options/IOptions';
+import { ref, inject } from 'vue'
 
 defineProps<{ msg: string }>()
+const props = inject("options") as IOptions;
 
 const count = ref(0)
 </script>
@@ -14,6 +16,7 @@ const count = ref(0)
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
+      Hello {{ props?.user?.name }}
     </p>
   </div>
 

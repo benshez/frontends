@@ -1,6 +1,8 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
+    "outDir": "./dist",
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -30,5 +32,9 @@
     "env.d.ts",
     "src/**/*",
     "src/**/*.vue"
+  ],
+  "exclude": [
+    "src/*.vue.d.ts",
+    "src/**/*.vue.d.ts"
   ]
 }

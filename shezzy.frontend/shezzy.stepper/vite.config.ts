@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
-import replace from "rollup-plugin-replace";
+import replace from "@rollup/plugin-replace";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +10,7 @@ export default defineConfig({
     vue(),
     cssInjectedByJsPlugin(),
     replace({
+      'preventAssignment': true,
       'process.env.NODE_ENV': JSON.stringify( 'production' )
     })
   ],
@@ -32,7 +33,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@/': new URL('./src/', import.meta.url).pathname,
+      "@/": path.resolve(__dirname,"/src"),
     }
   }
 })

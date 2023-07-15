@@ -2,13 +2,14 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
-import replace from "rollup-plugin-replace";
+import replace from "@rollup/plugin-replace";
 
 var vite_config_default = defineConfig({
   plugins: [
     vue(),
     cssInjectedByJsPlugin(),
     replace({
+      'preventAssignment': true,
       'process.env.NODE_ENV': JSON.stringify( 'production' )
     })
   ],
@@ -31,7 +32,7 @@ var vite_config_default = defineConfig({
   },
   resolve: {
     alias: {
-      "@/": new URL("./src/", "file://C:\\Users\\benvh01\\Projects\\youi-widgets\\Youi.Widgets\\ui\\vite.config.ts").pathname,
+      "@/": path.resolve(__dirname,"/src"),
     }
   }
 });
