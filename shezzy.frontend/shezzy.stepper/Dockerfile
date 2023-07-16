@@ -21,5 +21,5 @@ COPY . .
 # build app for production with minification
 RUN yarn build
 
-EXPOSE 8080
+EXPOSE 4024
 CMD [ "http-server", "dist" ]

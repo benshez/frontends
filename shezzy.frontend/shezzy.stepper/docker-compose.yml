@@ -1,18 +1,14 @@
 version: "3.9"
 services:
-  docker-shezzy-frontend:
+  docker-shezzy-frontend-stepper:
     build: .
-    container_name: docker-shezzy-frontend
-    image: docker-shezzy-frontend
+    container_name: docker-shezzy-frontend-stepper
+    image: docker-shezzy-frontend-stepper
     networks:
-      - shezzy_frontend    
+      - shezzy_frontend_stepper
     ports:
       - "4024:4024"      
     volumes:
       - /app
     env_file: .env
-
-networks:
-  shezzy_frontend:
-    name: shezzy_frontend
-    driver: bridge     
+   
